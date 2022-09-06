@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}
+    {{ super() }}
+    Signup
+{% endblock %}
+
+{% block content %}
+    <h1>Nuevo registro</h1>
+    <div class="container">
+        {{ render_form(signup_form, button_style='btn btn-primary d-grid col-12 mx-auto') }}
+    </div>
+{% endblock %}

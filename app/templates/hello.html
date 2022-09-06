@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macros %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}
+    {{ super() }}
+    Learning flask
+{% endblock %}
+
+{% block content %}
+    {% if username %}
+        <h1 class="text-center">Bienvenido, {{ username | capitalize }}</h1>
+    {% endif %}
+    {% if user_ip != 'None' %}
+        <h3 class="text-center">Tu IP es {{user_ip}}</h3>
+    {% else %}
+        <a href="{{url_for('index')}}">Ir a inicio</a>
+    {% endif %}
+
+    <div class="container col-md-6 mb-2 d-flex align-items-center flex-column">
+        <h2>Nueva tarea</h2>
+        <form method='POST'>
+            <div class="d-flex flex-column">
+                {{ todo_form.hidden_tag() }}
+                {{ todo_form.description(class="form-control mb-2", placeholder='Descripción') }} 
+                {{ todo_form.submit(class="btn btn-primary btn-lg btn-block") }} 
+            </div>
+        </form>
+        <!-- {{ render_form(todo_form, button_style='btn btn-primary d-grid col-md-12 mx-auto') }} -->
+    </div>
+    <div class="d-flex justify-content-center col-md-12">
+        <ul class="list-group col-md-8">
+            {% for todo in todos %}
+                {{macros.render_todo(todo, delete_todo_form, update_todo_form)}}
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
