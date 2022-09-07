@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from flask import Flask
 from flask_bootstrap import Bootstrap5
 from flask_login import LoginManager
@@ -5,6 +6,8 @@ from flask_login import LoginManager
 from .config import Config
 from .auth import auth
 from .models import UserModel
+
+load_dotenv() # Take environment variables from .env
 
 login_manager = LoginManager()
 # Le decimos la ruta de login que maneje

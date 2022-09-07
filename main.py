@@ -1,4 +1,3 @@
-from crypt import methods
 import unittest
 from flask import request, make_response, redirect, escape, render_template, session, url_for, flash
 from flask_login import login_required, current_user
@@ -17,11 +16,21 @@ def test():
 # Si no se encuentra la ruta usa esta función
 @app.errorhandler(404)
 def not_found(error):
-    return render_template('404.html', error=error)
+    context = {
+        'code': 404,
+        'error_message': "Sorry, we couldn't find what you were looking for.",
+        'error': error
+    }
+    return render_template('http_error.html', **context)
 
 @app.errorhandler(500)
 def server_error(error):
-    return render_template('500.html', error=error)
+    context = {
+        'code': 500,
+        'error_message': "It's not you, it's us.",
+        'error': error
+    }
+    return render_template('http_error.html', **context)
 
 @app.route('/')
 def index():

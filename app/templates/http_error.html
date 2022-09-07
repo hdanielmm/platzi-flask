@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{super()}}    
-    500
+    {{super()}}
+    Error {{ code }}
 {% endblock %}
 
 {% block content %}
-    <h1>No eres tú, somos nosotros</h1>
-    <p>{{error}}</p>
+    <h1>{{ error_message }}</h1>
+    <p>{{ error }}</p>
 {% endblock %}
